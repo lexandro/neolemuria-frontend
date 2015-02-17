@@ -166,18 +166,30 @@
             padding: 5px;
             z-index: 2;
         }
-		a:link {
-			color: #FF0000;
-		}
-		a:visited {
-			color: #00FF00;
-		}
-		a:hover {
-			color: #FF00FF;
-		}
-		a:active {
-			color: #0000FF;
-		}
+
+        .deployment_health {
+            position: absolute;
+            bottom: calc(5%);
+            left: calc(15%);
+            padding: 5px;
+            z-index: 2;
+        }
+
+        a:link {
+            color: #FF0000;
+        }
+
+        a:visited {
+            color: #00FF00;
+        }
+
+        a:hover {
+            color: #FF00FF;
+        }
+
+        a:active {
+            color: #0000FF;
+        }
     </style>
 
     <script src="js/prefixfree.min.js"></script>
@@ -203,7 +215,10 @@
 </div>
 
 <img class="code_health" src="https://api.shippable.com/projects/54d2825c5ab6cc13528ad5a8/badge?branchName=master"
-     alt="Status">
+     alt="Backend status">
+
+<img class="deployment_health" src="https://neolemuria.dploy.io/badge/45290641941193/21594.png"
+     alt="Deployment status from dploy.io" alt="Frontend status">
 
 <div class="body"></div>
 <div class="grad"></div>
