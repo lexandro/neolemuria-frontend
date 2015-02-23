@@ -5,6 +5,10 @@
     <title>NeoLemuria - A Szilánkvilág</title>
     <link rel="icon" type="image/png" href="shield.png"/>
 
+    <link href='css/bootstrap.css' rel='stylesheet'>
+    <link href='css/custom  .css' rel='stylesheet'>
+
+
     <style>
         @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
         @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -197,6 +201,15 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="welcome">
     A Szilánkok nagyon messziről érkeztek... Nagy rémületet okoztak az első darabok, amikor megjelentek az égen
@@ -213,12 +226,6 @@
     <br/>
     <a href="help/index.html">Hol tart a fejlesztés?</a>
 </div>
-
-<img class="code_health" src="https://api.shippable.com/projects/54d2825c5ab6cc13528ad5a8/badge?branchName=master"
-     alt="Backend status">
-
-<img class="deployment_health" src="https://neolemuria.dploy.io/badge/45290641941193/21594.png"
-     alt="Deployment status from dploy.io" alt="Frontend status">
 
 <div class="body"></div>
 <div class="grad"></div>
@@ -250,7 +257,25 @@
     ga('create', 'UA-59540621-1', 'auto');
     ga('send', 'pageview');
 </script>
+<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">
+
+        <div class="fb-like" data-href="https://www.facebook.com/pages/NeoLemuria-hivatalos-oldala"
+             data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+        </p>
+        <p class="pull-right">
+            <img class="code_health"
+                                   src="https://api.shippable.com/projects/54d2825c5ab6cc13528ad5a8/badge?branchName=master"
+                                   alt="Backend status">
+
+            <img class="deployment_health" src="https://neolemuria.dploy.io/badge/45290641941193/21594.png"
+                 alt="Deployment status from dploy.io" alt="Frontend status">
+        </p>
+    </div>
+</footer>
 </body>
 
 </html>
