@@ -1,131 +1,264 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>NeoLemuria - Súgó - A Szilánkvilág</title>
-    <link rel="icon" type="image/png" href="../shield.png"/>
-
-
-    <style>
-        @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-        @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-        @import url(http://fonts.googleapis.com/css?family=Anaheim:100,200,400);
-
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Súgó | NeoLemuria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
         body {
-            margin: 0;
-            padding: 0;
-            background: #fff;
-
-            color: #fff;
-            font-family: Arial;
-            font-size: 12px;
+            padding-top: 50px;
             overflow: hidden;
         }
 
-        .body {
+        #wrapper {
+            min-height: 100%;
+            height: 100%;
+            width: 100%;
             position: absolute;
             top: 0px;
-            left: 0px;
-            right: 0px;
-            bottom: 0px;
-            width: auto;
-            height: auto;
-            background-image: url("../backgrounds/explosion.jpg");
-            background-size: cover;
-            -webkit-filter: blur(1px);
-            z-index: 0;
-
+            left: 0;
+            display: inline-block;
         }
 
-        .grad {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            right: 0px;
-            bottom: 0px;
-            width: auto;
-            height: auto;
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.65))); /* Chrome,Safari4+ */
-            z-index: 1;
-            opacity: 0.7;
+        #main-wrapper {
+            height: 100%;
+            overflow-y: auto;
+            padding: 50px 0 0px 0;
         }
 
-        .header {
-            position: absolute;
-            top: calc(10% - 35px);
-            left: calc(50% - 255px);
-            z-index: 2;
+        #main {
+            position: relative;
+            height: 100%;
+            overflow-y: auto;
+            padding: 0 15px;
         }
 
-        .header div {
-            float: left;
-            color: #fff;
-            font-family: 'Exo', sans-serif;
-            font-size: 35px;
-            font-weight: 200;
-
+        #sidebar-wrapper {
+            height: 100%;
+            padding: 50px 0 0px 0;
+            position: fixed;
+            border-right: 1px solid gray;
         }
 
-        .header div span {
-            color: #b8bf20 !important;
+        #sidebar {
+            position: relative;
+            height: 100%;
+            overflow-y: auto;
         }
 
-        .welcome {
-            font-size: 20px;
-            font-family: 'Anaheim', serif;
-            position: absolute;
-            top: calc(20%);
-            left: calc(20%);
-            width: calc(50%);
-            z-index: 2;
-            text-align: justify
+        #sidebar .list-group-item {
+            border-radius: 0;
+            border-left: 0;
+            border-right: 0;
+            border-top: 0;
         }
 
+        @media (max-width: 992px) {
+            body {
+                padding-top: 0px;
+            }
+        }
 
+        @media (min-width: 992px) {
+            #main-wrapper {
+                float: right;
+            }
+        }
+
+        @media (max-width: 992px) {
+            #main-wrapper {
+                padding-top: 0px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            #sidebar-wrapper {
+                position: static;
+                height: auto;
+                max-height: 300px;
+                border-right: 0;
+            }
+        }
     </style>
-
-    <script src="js/prefixfree.min.js"></script>
-
 </head>
 <body>
-
-<div class="welcome">
-    Egy.<br/>
-    "Az Első Szilánk hatalmas volt. Fülsüketítő robajjal ért földet és az általa felvert por még napok múltán is
-    elhomályosította az eget. A Szilánkkal érkezők még keveset tudtak új otthonukról. Nincstelenül, a puszta életüket
-    mentve, fejvesztve menekültek darabokra hulló világukról. <br/>Elsőnek érkezni sosem könnyű, hiszen nem várja fedél
-    a jövevényt, nincsenek társai akiknél meghúzhatja magát és bármi történjék csak önmagára számíthat ezen a kietlen
-    világon. Fel kell fedezni a közeli környéket, fel kell építeni az első otthonokat és ha biztonságban akartok aludni,
-    bizony a védelemről is gondoskodni kell! Egy gyors rajtaütés és máris odalesznek a nehezen felfedezett új
-    területek."<br/><br/>
-    Elkészült akciók: Üres terület felfedezése, alap épületek építése, egységek képzése, területszerző támadás
-    előkészítése/visszavonása/indítása, közös fórum, főoldal. Nyersanyag igény nincs. Még az alapvető ellenőrzések is
-    hiányoznak.<br/><br/>
-    Állapot: Az első szilánk már úton van NeoLemuria felé...
-    <br/>
-    Kettő.<br/>
-    "A Második Szilánk közepes méretű volt. Érkezése közben több darabra szakadt és hamarosan fellángoltak a harcok az
-    újonnan érkezettek és a Letelepettek között, akik hiába voltak többen, nehezen boldogultak a vérszomjas és kiéhezett
-    seregekkel. Nagy gyűlést rendeztek és eldöntötték, hogy erőiket egyesítve birodalmat alkotnak, hogy segítsék egymást
-    katonákkal, élelemmel és fegyverekkel. A legváratlanabb pillanatban felbukkantak a Varázslók és misztikus hatalmukat
-    felajánlották a Birodalomnak. Az erdőkből összefogdosott rablókból és más gonosztevőkből félelmetes alvilági sereg
-    kerekedett, aki éjjel-nappal zaklatta az Ellenséget, nem hagyván egy percnyi nyugtot sem az őröknek
-    többé."<br/><br/>
-    Elkészült akciók: Raktárak, hit/rúna/építéspont termelés, földművelés, bányászat, kovácsolás. Birodalom
-    alapok (fórum, történet, csatlakozás, távozás), üzenetküldés, támadás(fosztogatás,rombolás), azonnali varázslat
-    és alvilági akciók. Mana és tolvajlás regenereálódás
-    .<br/><br/>
-    Állapot: Tervezés alatt...
-    <br/>
+<div id="header" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="icon-reorder"></i>
+        </button>
+        <a class="navbar-brand" href="#">
+            Neo|Lemuria
+        </a>
+    </div>
+    <nav class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alapok<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Ismertető</a></li>
+                    <li><a href="#">Első lépések</a></li>
+                    <li><a href="#">Főoldal</a></li>
+                    <li><a href="#">Játékmenet</a></li>
+                    <li><a href="#">Frissítések, körök</a></li>
+                    <li><a href="#">Kifejezések</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fejlődés<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Képzés</a></li>
+                    <li><a href="#">Építkezés</a></li>
+                    <li><a href="#">Kutatás</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gazdaság<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Termelés</a></li>
+                    <li><a href="#">Készletek</a></li>
+                    <li><a href="#">Épületek</a></li>
+                    <li><a href="#">Üzemelés</a></li>
+                    <li><a href="#">Piac</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Statisztika<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Események</a></li>
+                    <li><a href="#">Krónikák</a></li>
+                    <li><a href="#">Statisztikák</a></li>
+                    <li><a href="#">Bónuszok</a></li>
+                    <li><a href="#">Demográfia</a></li>
+                    <li><a href="#">Érdekességek</a></li>
+                    <li><a href="#">Pontlisták</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eszmecsere<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Fórum</a></li>
+                    <li><a href="#">Üzenetek</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Táblázatok<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Népek</a></li>
+                    <li><a href="#">Épületek</a></li>
+                    <li><a href="#">Anyagok, termékek</a></li>
+                    <li><a href="#">Találmányok, kutatás</a></li>
+                    <li><a href="#">Katonaság</a></li>
+                    <li><a href="#">Mágikus kasztok</a></li>
+                    <li><a href="#">Alvilági kasztok</a></li>
+                    <li><a href="#">Hajók</a></li>
+                    <li><a href="#">Katonai akciók</a></li>
+                    <li><a href="#">Mágikus akciók</a></li>
+                    <li><a href="#">Alvilági akciók</a></li>
+                    <li><a href="#">Felfedezés akciók</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Korszakok<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">1. korszak</a></li>
+                    <li><a href="#">2. korszak</a></li>
+                    <li><a href="#">3. korszak</a></li>
+                    <li><a href="#">4. korszak</a></li>
+                    <li><a href="#">5. korszak</a></li>
+                    <li><a href="#">6. korszak</a></li>
+                    <li><a href="#">7. korszak</a></li>
+                    <li><a href="#">8. korszak</a></li>
+                    <li><a href="#">9. korszak</a></li>
+                    <li><a href="#">10. korszak</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Egyéb<i class="icon-sort-down"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Kapcsolat</a></li>
+                    <li><a href="#">Jogi nyilatkozat</a></li>
+                    <li><a href="#">Játék főoldalára</a></li>
+                    <li><a href="#">Kilépés</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 </div>
-<div class="body"></div>
-<div class="grad"></div>
-<div class="header">
-    <div>Neo<span>Lemuria</span></div>
+<div id="wrapper">
+    <div id="sidebar-wrapper" class="col-md-1">
+        <div id="sidebar">
+            <ul class="nav list-group">
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Háború</a>
+                </li>
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Mágia</a>
+                </li>
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Alvilág</a>
+                </li>
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Birodalom</a>
+                </li>
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Beállítások</a>
+                </li>
+                <li>
+                    <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>VIP</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main-wrapper" class="col-md-11 pull-right">
+        <div id="main">
+            <div class="page-header">
+                <h3>A Szilánkokról</h3>
+            </div>
+            <h4>Egy</h4>
+
+            <p>
+                "Az Első Szilánk hatalmas volt. Fülsüketítő robajjal ért földet és az általa felvert por még napok múltán is elhomályosította az eget, rossz
+                ízzel töltve meg a levegőt. A Szilánkkal érkezők semmit sem tudtak új otthonukról, ahol újra kell kezdeniük mindent. Nincstelenül, a puszta
+                életüket mentve, fejvesztve menekültek darabokra hulló világukról és utaztak át téren és időn. <br/>
+                Elsőnek érkezni sosem könnyű, hiszen nem várja fedél a jövevényt, nincsenek társai akiknél meghúzhatja magát és bármi történjék is, csak
+                önmagára számíthat ezen a kietlen világon. Fel kell fedezni a közeli környéket, fel kell építeni az első otthonokat és ha biztonságban akartok
+                aludni, bizony a védelemről is gondoskodni kell! Egy gyors rajtaütés és máris odalesznek a nehezen felfedezett új területek."<br/><br/>
+                Elkészült akciók: Üres terület felfedezése, alap épületek építése, egységek képzése, területszerző támadás előkészítése/visszavonása/indítása,
+                közös fórum, főoldal. Nyersanyag igény nincs. Még az alapvető ellenőrzések is hiányoznak.<br/><br/>
+                Állapot: Az első szilánk már úton van NeoLemuria felé...
+            </p>
+            <h4>Kettő</h4>
+
+            <p>
+                "A Második Szilánk kisebb volt mint az első. Érkezése közben több darabra szakadt és hamarosan fellángoltak a harcok az
+                újonnan érkezettek és a Letelepettek között, akik hiába voltak többen, nehezen boldogultak a vérszomjas és kiéhezett
+                seregekkel. Nagy gyűlést rendeztek és eldöntötték, hogy erőiket egyesítve birodalmat alkotnak, hogy segítsék egymást
+                katonákkal, élelemmel és fegyverekkel. A legváratlanabb pillanatban felbukkantak a Varázslók és misztikus hatalmukat
+                felajánlották a Birodalomnak. Az erdőkből összefogdosott rablókból és más gonosztevőkből félelmetes alvilági sereg
+                kerekedett, aki éjjel-nappal zaklatta az Ellenséget, nem hagyván egy percnyi nyugtot sem az őröknek
+                többé."<br/><br/>
+                Elkészült akciók: Raktárak, hit/rúna/építéspont termelés, földművelés, bányászat, kovácsolás. Birodalom
+                alapok (fórum, történet, csatlakozás, távozás), üzenetküldés, támadás(fosztogatás,rombolás), azonnali varázslat
+                és alvilági akciók. Mana és tolvajlás regenereálódás
+                .<br/><br/>
+                Állapot: Tervezés alatt...
+            </p>
+        </div>
+    </div>
 </div>
 
-<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+<script type='text/javascript'>
+    $(document).ready(function () {
+    });
+</script>
 
 </body>
-
 </html>
