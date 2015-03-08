@@ -1,5 +1,7 @@
 'use strict';
 
+// TODO add better logging
+
 // Declare app level module which depends on views, and components
 angular.module('neoLemuriaApp', [
     'ngRoute',
@@ -8,9 +10,10 @@ angular.module('neoLemuriaApp', [
 ])
     .run(function ($rootScope) {
         $rootScope.token = "";
-        $rootScope.counter = 0;
-        console.log("init rootscope" + Object.keys($rootScope));
+        console.log("Rootscope initialized");
     })
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/login'});
-    }]);
+
+    }])
+;
