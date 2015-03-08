@@ -1,14 +1,15 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('main', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/main', {
-    templateUrl: 'app/main/main.html',
-    controller: 'View2Ctrl'
-  });
-}])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/main', {
+            templateUrl: 'app/main/main.html',
+            controller: 'MainCtrl'
+        });
+    }])
 
-.controller('View2Ctrl', [function() {
+    .controller('MainCtrl', ['$rootScope', function ($rootScope) {
+        console.log("Main check rootscope" + Object.keys($rootScope));
 
-}]);
+    }]);

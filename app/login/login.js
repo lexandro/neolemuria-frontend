@@ -1,15 +1,21 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('login', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         console.log('Login klaty1')
         $routeProvider.when('/login', {
             templateUrl: 'app/login/login.html',
-            controller: 'View1Ctrl'
+            controller: 'LoginCtrl'
         });
     }])
 
-    .controller('View1Ctrl', [function () {
-        console.log('Login klaty2')
-    }]);
+    .controller('LoginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.update = function (user) {
+            $scope.master = angular.copy(user);
+            console.log("check rootscope" + Object.keys($rootScope));
+        };
+    }])
+
+
+;
