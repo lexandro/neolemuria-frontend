@@ -3,10 +3,10 @@
 
     <form name="login" novalidate>
         <p>Username:</p>
-        <input type="text" ng-model="user.name"/>
+        <input type="text" ng-init="user.name='tester'" ng-model="user.name"/>
 
         <p>Password:</p>
-        <input type="password" ng-model="user.password"/>
+        <input type="password" ng-init="user.password='test1234'" ng-model="user.password"/>
 
         <p></p>
         <input type="submit" ng-click="update(user)" value="Login"/>

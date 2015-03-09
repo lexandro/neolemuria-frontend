@@ -9,12 +9,15 @@ angular.module('login', ['ngRoute'])
         });
     }])
 
-    .controller('LoginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('LoginCtrl', ['$rootScope', '$scope', 'Authentication', function ($rootScope, $scope, Authentication) {
         $scope.update = function (user) {
             $scope.master = angular.copy(user);
             $scope.token = user.name;
-            console.log("user " + Object.keys(user));
-            console.log("check rootscope " + Object.keys($rootScope));
+            //console.log("user: " + Object.keys(user));
+            var entry = new Authentication();
+            entry.$save(function () {
+                console.log(entry);
+            });
         };
     }])
 ;

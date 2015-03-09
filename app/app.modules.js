@@ -5,6 +5,8 @@
 // Declare app level module which depends on views, and components
 angular.module('neoLemuriaApp', [
     'ngRoute',
+    'ngResource',
+    'neoLemuriaApp.services',
     'login',
     'main'
 ])
@@ -12,8 +14,9 @@ angular.module('neoLemuriaApp', [
         $rootScope.token = "";
         console.log("Rootscope initialized");
     })
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', "$httpProvider", function ($routeProvider, $httpProvider) {
         $routeProvider.otherwise({redirectTo: '/login'});
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = "*";
 
     }])
 ;

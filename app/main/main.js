@@ -10,6 +10,5 @@ angular.module('main', ['ngRoute'])
     }])
 
     .controller('MainCtrl', ['$rootScope', function ($rootScope) {
-        console.log("Main check rootscope" + Object.keys($rootScope));
 
     }]);
