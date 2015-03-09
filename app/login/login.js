@@ -12,11 +12,10 @@ angular.module('login', ['ngRoute'])
     .controller('LoginCtrl', ['$rootScope', '$scope', 'Authentication', function ($rootScope, $scope, Authentication) {
         $scope.update = function (user) {
             $scope.master = angular.copy(user);
-            $scope.token = user.name;
-            //console.log("user: " + Object.keys(user));
             var entry = new Authentication();
             entry.$save(function () {
-                console.log(entry);
+                console.log("Return: " + Object.keys(entry));
+                $rootScope.token = entry.token;
             });
         };
     }])

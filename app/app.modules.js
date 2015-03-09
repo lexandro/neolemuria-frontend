@@ -16,7 +16,5 @@ angular.module('neoLemuriaApp', [
     })
     .config(['$routeProvider', "$httpProvider", function ($routeProvider, $httpProvider) {
         $routeProvider.otherwise({redirectTo: '/login'});
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = "*";
-
     }])
 ;

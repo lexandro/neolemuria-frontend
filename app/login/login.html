@@ -1,16 +1,22 @@
-<div ng-controller="LoginCtrl">
-    <p>Login screen.</p>
+<div class="container" ng-controller="LoginCtrl">
+    <div class="col-md-4"/>
+    <div class="col-md-4">
 
-    <form name="login" novalidate>
-        <p>Username:</p>
-        <input type="text" ng-init="user.name='tester'" ng-model="user.name"/>
+        <form class="login" novalidate>
+            <h2 class="form-signin-heading">Bejelentkezés</h2>
 
-        <p>Password:</p>
-        <input type="password" ng-init="user.password='test1234'" ng-model="user.password"/>
+            <p>Nicknév:</p>
+            <input type="text" id='user.name' class="form-control" ng-init="user.name='tester'" ng-model="user.name" required autofocus>
 
-        <p></p>
-        <input type="submit" ng-click="update(user)" value="Login"/>
-        <pre>master = {{master}}</pre>
-        <pre>master = {{token}}</pre>
-    </form>
+            <p>Jelszó:</p>
+            <input type="password" id="password" class="form-control" ng-init="user.password='test1234'" ng-model="user.password" required>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me">Bejelentkezve marad
+                </label>
+            </div>
+            <input type="submit" class="btn btn-lg btn-primary btn-block" ng-click="update(user)" value="Bejelentkezés"/>
+        </form>
+    </div>
 </div>
