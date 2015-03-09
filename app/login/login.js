@@ -17,6 +17,4 @@ angular.module('login', ['ngRoute'])
             console.log("check rootscope " + Object.keys($rootScope));
         };
     }])
-
-
 ;
