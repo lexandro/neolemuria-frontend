@@ -9,6 +9,8 @@ angular.module('main', ['ngRoute'])
         });
     }])
 
-    .controller('MainCtrl', ['$rootScope', function ($rootScope) {
-
+    .controller('MainCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
+        if ($rootScope.token.length < 1) {
+            $location.path('login');
+        }
     }]);
