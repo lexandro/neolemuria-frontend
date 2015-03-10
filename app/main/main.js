@@ -13,9 +13,8 @@ angular.module('main', ['ngRoute'])
         if ($rootScope.token.length < 1) {
             $location.path('login');
         } else {
-            var entry = new Country();
-
-            entry = Country.get({countryId: $rootScope.token.token}, function () {
+            //var entry = new Country();
+            var entry = Country.get({countryId: $rootScope.token.token}, function () {
                     console.log("MainCtrl returned: " + JSON.stringify(entry));
                     $scope.country = entry;
                 }

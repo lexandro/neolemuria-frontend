@@ -8,12 +8,6 @@ angular.module('services', [])
     })
     .factory('Country', function ($resource, $rootScope) {
         //entry = $resource('http://localhost:8080/countries/4/overview', {});
-        entry = $resource($rootScope.host + '/countries/:countryId/overview', {}, {
-            get: {
-                method: 'GET',
-                isArray: false,
-                headers: {"userToken": $rootScope.token.token}
-            }
-        });
+        entry = $resource($rootScope.host + '/countries/:countryId/overview', {});
         return entry;
     });
