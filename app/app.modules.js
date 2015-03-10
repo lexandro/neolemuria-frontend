@@ -18,7 +18,7 @@ angular.module('neoLemuriaApp', [
         console.log("Rootscope initialized");
     })
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-        $httpProvider.defaults.headers.common.userToken = '1';
+        $httpProvider.defaults.headers.common.userToken = '';
         $routeProvider.otherwise({redirectTo: '/login'});
     }])
 ;
