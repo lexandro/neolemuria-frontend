@@ -14,8 +14,7 @@ angular.module('login', ['ngRoute'])
             $scope.master = angular.copy(user);
             var entry = new Authentication();
             entry.$save(function () {
-                console.log("Returned: " + Object.keys(entry));
-                console.log("Returned: " + JSON.stringify(entry));
+                console.log("LoginCtrl returned json: " + JSON.stringify(entry));
                 $rootScope.token = entry;
                 $location.path('main');
             });

@@ -6,15 +6,22 @@
 angular.module('neoLemuriaApp', [
     'ngRoute',
     'ngResource',
-    'neoLemuriaApp.services',
+    'services',
     'login',
     'main'
 ])
     .run(function ($rootScope) {
         $rootScope.token = "";
+        $rootScope.host = "http://localhost:8080";
+        //$rootScope.host = "http://neolemuria.com:8080";
+        //
         console.log("Rootscope initialized");
     })
     .config(['$routeProvider', "$httpProvider", function ($routeProvider, $httpProvider) {
         $routeProvider.otherwise({redirectTo: '/login'});
+        $httpProvider.defaults.headers.patch = {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
     }])
 ;
+
