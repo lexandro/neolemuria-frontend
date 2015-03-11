@@ -1,129 +1,155 @@
 <div class="container" ng-controller="MainCtrl">
-    <table class="table table-condensed table-bordered">
-        <tr>
-            <td colspan="8" align="center">
-                Ország: {{country.name}} (#{{country.id}})
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8" align="center">
-                Birodalom: {{country.empireName}} (#{{country.empireId}})
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8" align="center">
-                Korszak: #TBD# (#{{country.level}})
-            </td>
-        </tr>
-        <tr>
-            <td width="10%" class="active">Sziget</td>
-            <td width="10%" align="right">#TBD#</td>
-            <td width="1%"/>
-            <td width="10%" class="active">Gyalogság</td>
-            <td width="10%" align="right">{{country.footmanAmount}}</td>
-            <td width="1%"/>
-            <td width="10%" class="active">Ostromgép</td>
-            <td width="10%" align="right">{{country.heavyAmount}}</td>
-        </tr>
-        <tr>
-            <td class="active">Nép</td>
-            <td>#TBD#</td>
-            <td/>
-            <td class="active">Védő</td>
-            <td>{{country.defenderAmount}}</td>
-            <td/>
-            <td class="active">E. Védő</td>
-            <td>{{country.eliteDefenderAmount}}</td>
-        </tr>
-        <tr>
-            <td class="active">Rang</td>
-            <td>#TBD#</td>
-            <td/>
-            <td class="active">Támadó</td>
-            <td>{{country.horsemanAmount}}</td>
-            <td/>
-            <td class="active">E. Támadó</td>
-            <td>{{country.eliteHorsemanAmount}}</td>
-        </tr>
-        <tr>
-            <td colspan="2"></td>
-            <td/>
-            <td class="active">Harci kedv</td>
-            <td>{{country.aggression}}</td>
-            <td/>
-            <td class="active">Hajók</td>
-            <td>#TBD#</td>
-        </tr>
-        <tr>
-            <td class="active">Terület</td>
-            <td>{{country.landSize}}</td>
-            <td/>
-            <td colspan="2"></td>
-            <td/>
-            <td colspan="2"></td>
-        </tr>
-        <tr>
-            <td class="active">Lakos</td>
-            <td>#TBD#</td>
-            <td/>
-            <td class="active">Mágia</td>
-            <td>{{country.magicianAmount}}</td>
-            <td/>
-            <td class="active">Mana</td>
-            <td>{{country.mana}}</td>
-        </tr>
-        <tr>
-            <td class="active">Munkanélküli</td>
-            <td>#TBD#</td>
-            <td/>
-            <td class="active">Rúna</td>
-            <td>{{country.rune}}</td>
-            <td/>
-            <td class="active">Hit</td>
-            <td>{{country.faith}}</td>
-        </tr>
-        <tr>
-            <td colspan="2"/>
-            <td/>
-            <td class="active">Alvilág</td>
-            <td>{{country.saboteurAmount}}</td>
-            <td/>
-            <td class="active">Ármány</td>
-            <td>{{country.intrigue}}</td>
-        </tr>
-        <tr>
-            <td class="active">Hangulat</td>
-            <td>{{country.moral}}</td>
-            <td/>
-            <td colspan="2"/>
-            <td/>
-            <td colspan="2"/>
-        </tr>
-        <tr>
-            <td class="active">Dekadencia</td>
-            <td>{{country.decadence}}</td>
-            <td/>
-            <td class="active">Dénár</td>
-            <td>{{country.money}}</td>
-            <td/>
-            <td class="active">Termény</td>
-            <td>{{country.foodAmount}}</td>
-        </tr>
-        <tr>
-            <td align="center"><strong>Pontszám</strong></td>
-            <td align="center"><strong>#TBD#</strong></td>
-            <td/>
-            <td align="center"><strong>Hírnév</strong></td>
-            <td align="center"><strong>{{country.fame}}</strong></td>
-            <td/>
-            <td align="center"><strong>Helyezés</strong></td>
-            <td align="center"><strong>#TBD# (#TBD#)</strong></td>
-        </tr>
-    </table>
+
+    <div id="wrapper">
+        <div id="sidebar-wrapper" class="col-md-2">
+            <div id="sidebar">
+                <ul class="nav list-group">
+                    <li>
+                        <a href="#">Képzés</a>
+                    </li>
+                    <li>
+                        <a href="#">Építkezés</a>
+                    </li>
+                    <li>
+                        <a href="#">Háború</a>
+                    </li>
+                    <li>
+                        <a href="#">Felfedezés</a>
+                    </li>
+                    <li>
+                        <a href="#">Beállítások</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="main-wrapper" class="col-md-10 pull-right">
+            <div id="main">
+
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <td colspan="8" align="center">
+                            Ország: {{country.name}} (#{{country.id}})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" align="center" ng-show="(country.empireName.length>0) ? true : false">
+                            Birodalom: {{country.empireName}} (#{{country.empireId}})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" align="center">
+                            Korszak: #TBD# (#{{country.level}})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="active">Sziget</td>
+                        <td width="10%" align="right">#TBD#</td>
+                        <td width="1%"/>
+                        <td width="10%" class="active">Gyalogság</td>
+                        <td width="10%" align="right">{{country.footmanAmount}}</td>
+                        <td width="1%"/>
+                        <td width="10%" class="active">Ostromgép</td>
+                        <td width="10%" align="right">{{country.heavyAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="active">Nép</td>
+                        <td align="right">#TBD#</td>
+                        <td/>
+                        <td class="active">Védő</td>
+                        <td align="right">{{country.defenderAmount}}</td>
+                        <td/>
+                        <td class="active">E. Védő</td>
+                        <td align="right">{{country.eliteDefenderAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="active">Rang</td>
+                        <td align="right">#TBD#</td>
+                        <td/>
+                        <td class="active">Támadó</td>
+                        <td align="right">{{country.horsemanAmount}}</td>
+                        <td/>
+                        <td class="active">E. Támadó</td>
+                        <td align="right">{{country.eliteHorsemanAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td/>
+                        <td class="active">Harci kedv</td>
+                        <td align="right">{{country.aggression}}</td>
+                        <td/>
+                        <td class="active">Hajók</td>
+                        <td align="right">#TBD#</td>
+                    </tr>
+                    <tr>
+                        <td class="active">Terület</td>
+                        <td align="right">{{country.landSize}}</td>
+                        <td/>
+                        <td colspan="2"></td>
+                        <td/>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td class="active">Lakos</td>
+                        <td align="right">#TBD#</td>
+                        <td/>
+                        <td class="active">Mágia</td>
+                        <td align="right">{{country.magicianAmount}}</td>
+                        <td/>
+                        <td class="active">Mana</td>
+                        <td align="right">{{country.mana}}</td>
+                    </tr>
+                    <tr>
+                        <td class="active">Munkanélküli</td>
+                        <td align="right">#TBD#</td>
+                        <td/>
+                        <td class="active">Rúna</td>
+                        <td align="right">{{country.rune}}</td>
+                        <td/>
+                        <td class="active">Hit</td>
+                        <td align="right">{{country.faith}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"/>
+                        <td/>
+                        <td class="active">Alvilág</td>
+                        <td align="right">{{country.saboteurAmount}}</td>
+                        <td/>
+                        <td class="active">Ármány</td>
+                        <td align="right">{{country.intrigue}}</td>
+                    </tr>
+                    <tr>
+                        <td class="active">Hangulat</td>
+                        <td align="right">{{country.moral}}</td>
+                        <td/>
+                        <td colspan="2"/>
+                        <td/>
+                        <td colspan="2"/>
+                    </tr>
+                    <tr>
+                        <td class="active">Dekadencia</td>
+                        <td align="right">{{country.decadence}}</td>
+                        <td/>
+                        <td class="active">Dénár</td>
+                        <td align="right">{{country.money}}</td>
+                        <td/>
+                        <td class="active">Termény</td>
+                        <td align="right">{{country.foodAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center"><strong>Pontszám</strong></td>
+                        <td align="center"><strong>#TBD#</strong></td>
+                        <td/>
+                        <td align="center"><strong>Hírnév</strong></td>
+                        <td align="center"><strong>{{country.fame}}</strong></td>
+                        <td/>
+                        <td align="center"><strong>Helyezés</strong></td>
+                        <td align="center"><strong>#TBD# (#TBD#)</strong></td>
+                    </tr>
+                </table>
 
 
-</div>
+            </div>
+        </div>
+    </div>
 
-<div class=" col-md-10
-        ">
 </div>
