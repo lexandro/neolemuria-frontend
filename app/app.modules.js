@@ -8,7 +8,8 @@ angular.module('neoLemuriaApp', [
     'ngResource',
     'services',
     'login',
-    'main'
+    'main',
+    'logout'
 ])
     .run(function ($rootScope) {
         $rootScope.token = "";

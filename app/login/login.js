@@ -17,7 +17,6 @@ angular.module('login', ['ngRoute'])
                 console.log("LoginCtrl returned json: " + JSON.stringify(entry));
                 $rootScope.token = entry;
                 $location.path('main');
-                //$httpProvider.defaults.headers.common.userToken = entry.token;
             });
         };
     }])
