@@ -6,17 +6,18 @@ angular.module('services', [])
         return entry;
     })
     .factory('Country', function ($resource, $rootScope) {
-        entry = $resource($rootScope.host + '/countries/:countryId/overview', {}, {
-            get: {
-                method: "GET",
-                isArray: false,
-                headers: {
-                    'userToken': function ($rootScope) {
-                        console.log("$rootScope: " + JSON.stringify($rootScope));
-                        return '1';
+        return {
+            overview: function (token) {
+                console.log("overview token: " + token);
+                return $resource($rootScope.host + '/countries/:countryId/overview', {}, {
+                    get: {
+                        method: "GET",
+                        isArray: false,
+                        headers: {
+                            'userToken': token
+                        }
                     }
-                }
+                });
             }
-        });
-        return entry;
+        }
     });
