@@ -9,7 +9,6 @@ angular.module('services', [])
         return {
             all: function () {
                 var buildings = $resource($rootScope.host + '/buildings', {});
-                console.log("Loaded building data: " + JSON.stringify(buildings));
                 $rootScope.buildings = buildings;
                 return buildings;
             }
@@ -56,9 +55,17 @@ angular.module('services', [])
         return {
             all: function () {
                 var units = $resource($rootScope.host + '/units', {});
-                console.log("Loaded units data: " + JSON.stringify(units));
                 $rootScope.units = units;
                 return units;
+            }
+        }
+    })
+    .factory('UnitType', function ($resource, $rootScope) {
+        return {
+            all: function () {
+                var unitTypes = $resource($rootScope.host + '/unittypes', {});
+                $rootScope.units = unitTypes;
+                return unitTypes;
             }
         }
     })

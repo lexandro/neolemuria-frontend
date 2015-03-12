@@ -9,7 +9,7 @@ angular.module('training', ['ngRoute'])
         });
     }])
 
-    .controller('TrainingCtrl', ['$rootScope', '$scope', '$location', 'Country', 'Unit', function ($rootScope, $scope, $location, Country, Unit) {
+    .controller('TrainingCtrl', ['$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType', function ($rootScope, $scope, $location, Country, Unit, UnitType) {
         console.log('TRAINING! ***********');
         if ($rootScope.token.length < 1) {
             $location.path('login');
@@ -25,6 +25,17 @@ angular.module('training', ['ngRoute'])
                 $scope.trainings = trainings;
                 $rootScope.trainings = trainings;
             });
+
+            var unitTypes = UnitType.all().query(function () {
+                console.log('Training unitTypes:' + JSON.stringify(unitTypes));
+                $scope.unitTypes = unitTypes;
+                $rootScope.unitTypes = unitTypes;
+            });
+
+            $scope.unitFilter = function (unit) {
+                return unit.level < 3;
+
+            }
         }
 
     }]);
