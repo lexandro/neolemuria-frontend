@@ -10,32 +10,53 @@ angular.module('training', ['ngRoute'])
     }])
 
     .controller('TrainingCtrl', ['$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType', function ($rootScope, $scope, $location, Country, Unit, UnitType) {
-        console.log('TRAINING! ***********');
         if ($rootScope.token.length < 1) {
             $location.path('login');
         } else {
             var units = Unit.all().query(function () {
-                $scope.units = units;
                 $rootScope.units = units;
+                $scope.units = $rootScope.units;
+                var unitTypes = UnitType.all().query(function () {
+                    $scope.unitTypes = unitTypes;
+                    $rootScope.unitTypes = unitTypes;
+                    var token = $rootScope.token;
+                    var trainings = Country.trainings(token.token).get({countryId: token.user.countryId}, function () {
+                        $scope.trainings = trainings;
+                        $rootScope.trainings = trainings;
+                        var maxLevel = 6;
+                        $scope.unitTypes.forEach(function (unitType) {
+                                if (unitType.id > 0) {
+                                    console.log(unitType);
+                                    if (unitType.id < 7) {
+                                        // military needs to be reversed and limited age and age-1
+                                        $scope.units.slice().reverse().forEach(function (unit) {
+                                            if (unit.unitType === unitType.name && (unit.level === maxLevel || unit.level === maxLevel - 1)) {
+                                                console.log("** unit " + JSON.stringify(unit));
+                                            }
+                                        })
+                                    } else {
+                                        // non-military is in normal order, without lower age restriction
+                                        $scope.units.forEach(function (unit) {
+                                            if (unit.unitType === unitType.name && unit.level <= maxLevel) {
+                                                console.log("** unit " + JSON.stringify(unit));
+                                            }
+
+                                        })
+                                    }
+                                }
+                            }
+                        );
+                    });
+                });
             });
 
-            var token = $rootScope.token;
-            var trainings = Country.trainings(token.token).get({countryId: token.user.countryId}, function () {
-                console.log('Training trainings:' + JSON.stringify(trainings));
-                $scope.trainings = trainings;
-                $rootScope.trainings = trainings;
-            });
-
-            var unitTypes = UnitType.all().query(function () {
-                console.log('Training unitTypes:' + JSON.stringify(unitTypes));
-                $scope.unitTypes = unitTypes;
-                $rootScope.unitTypes = unitTypes;
-            });
 
             $scope.unitFilter = function (unit) {
                 return unit.level < 3;
-
             }
+
         }
 
-    }]);
+    }
+    ])
+;

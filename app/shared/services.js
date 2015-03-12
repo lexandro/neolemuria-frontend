@@ -54,9 +54,7 @@ angular.module('services', [])
     .factory('Unit', function ($resource, $rootScope) {
         return {
             all: function () {
-                var units = $resource($rootScope.host + '/units', {});
-                $rootScope.units = units;
-                return units;
+                return $resource($rootScope.host + '/units', {});
             }
         }
     })
