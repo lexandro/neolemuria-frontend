@@ -9,6 +9,7 @@ angular.module('neoLemuriaApp', [
     'services',
     'login',
     'main',
+    'training',
     'logout'
 ])
     .run(function ($rootScope) {
