@@ -46,9 +46,9 @@
                         <tr>
                             <td width="10%" align="center" colspan="2">Átképzés</td>
                         </tr>
-                        <tr ng-repeat="unit in units | filter: unitFilter |orderBy: ['unitType', 'id']">
-                            <td class="all-center       ">{{unit.unitType}}</td>
-                            <td>{{unit.name}}</td>
+                        <tr ng-repeat="trainingLine in trainingLines">
+                            <td class="all-center">{{trainingLine.unitType}}</td>
+                            <td>{{trainingLine.name}}</td>
                             <td align="right">0</td>
                             <td align="right">0</td>
                             <td class="all-center"><input type="text" size="5"/></td>
