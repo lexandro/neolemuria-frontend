@@ -4,7 +4,7 @@ angular.module('logout', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/logout', {
-            templateUrl: 'app/logout/logout.html',
+            templateUrl: 'app/components/logout/logout.html',
             controller: 'LogoutCtrl'
         });
     }])

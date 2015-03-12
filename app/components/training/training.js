@@ -4,7 +4,7 @@ angular.module('training', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/training', {
-            templateUrl: 'app/training/training.html',
+            templateUrl: 'app/components/training/training.html',
             controller: 'TrainingCtrl'
         });
     }])
