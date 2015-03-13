@@ -21,45 +21,57 @@ angular.module('training', ['ngRoute'])
                         $scope.unitTypes = unitTypes;
                         $rootScope.unitTypes = unitTypes;
                         var token = $rootScope.token;
-                        var trainings = Country.trainings(token.token).get({countryId: token.user.countryId}, function () {
-                            $scope.trainings = trainings;
-                            var maxLevel = 1;
-                            var trainingLines = [];
-                            $scope.unitTypes.forEach(function (unitType) {
-                                var trainingLine = {};
 
-                                function createTrainingLine(unitType, unit) {
-                                    var result = {};
-                                    result.unitType = unitType.name;
-                                    result.name = unit.name;
-                                    result.amount = 0;
-                                    result.wounded = 0;
-                                    result.priority = 0;
-                                    trainingLines[trainingLines.length] = result;
-                                    return result;
-                                }
+                        var armies = Country.armies(token.token).get({countryId: token.user.countryId}, function () {
 
-                                if (unitType.id > 0) {
-                                    if (unitType.id < 7) {
-                                        // military needs to be reversed and limited age and age-1
-                                        $scope.units.slice().reverse().forEach(function (unit) {
-                                            if (unit.unitType === unitType.name && (unit.level === maxLevel || unit.level === maxLevel - 1)) {
-                                                trainingLine = createTrainingLine(unitType, unit);
+                            var trainings = Country.trainings(token.token).get({countryId: token.user.countryId}, function () {
+                                $scope.trainings = trainings;
+                                var maxLevel = 1;
+                                var trainingLines = [];
+                                $scope.unitTypes.forEach(function (unitType) {
+                                    var trainingLine = {};
+
+                                    function createTrainingLine(unitType, unit, trainings) {
+                                        var result = {};
+                                        result.unitType = unitType.name;
+                                        result.name = unit.name;
+                                        result.armyAmount = 0;
+                                        result.armyWounded = 0;
+                                        result.amount = 0;
+                                        result.priority = 0;
+                                        //
+                                        trainings.forEach(function (training) {
+                                            if (training.unitId === unit.id) {
+                                                result.amount = training.amount;
+                                                result.priority = training.priority;
                                             }
-                                        })
-                                    } else {
-                                        // non-military is in normal order, without lower age restriction
-                                        $scope.units.forEach(function (unit) {
-                                            if (unit.unitType === unitType.name && unit.level <= maxLevel) {
-                                                trainingLine = createTrainingLine(unitType, unit);
-                                            }
-
-                                        })
+                                        });
+                                        trainingLines[trainingLines.length] = result;
+                                        return result;
                                     }
 
-                                }
+                                    if (unitType.id > 0) {
+                                        if (unitType.id < 7) {
+                                            // military needs to be reversed and limited age and age-1
+                                            $scope.units.slice().reverse().forEach(function (unit) {
+                                                if (unit.unitType === unitType.name && (unit.level === maxLevel || unit.level === maxLevel - 1)) {
+                                                    trainingLine = createTrainingLine(unitType, unit, trainings);
+                                                }
+                                            })
+                                        } else {
+                                            // non-military is in normal order, without lower age restriction
+                                            $scope.units.forEach(function (unit) {
+                                                if (unit.unitType === unitType.name && unit.level <= maxLevel) {
+                                                    trainingLine = createTrainingLine(unitType, unit, trainings);
+                                                }
+
+                                            })
+                                        }
+
+                                    }
+                                });
+                                $scope.trainingLines = trainingLines;
                             });
-                            $scope.trainingLines = trainingLines;
                         });
                     });
                 });

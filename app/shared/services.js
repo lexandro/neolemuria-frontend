@@ -27,7 +27,18 @@ angular.module('services', [])
                     }
                 });
             },
-            buildings: function (token) {
+            armies: function (token) {
+                return $resource($rootScope.host + '/armies', {}, {
+                    get: {
+                        method: "GET",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
+                    }
+                });
+            },
+            lands: function (token) {
                 return $resource($rootScope.host + '/lands?countryId=:countryId', {}, {
                     query: {
                         method: "GET",

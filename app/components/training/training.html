@@ -49,11 +49,11 @@
                         <tr ng-repeat="trainingLine in trainingLines">
                             <td class="all-center">{{trainingLine.unitType}}</td>
                             <td>{{trainingLine.name}}</td>
-                            <td align="right">0</td>
-                            <td align="right">0</td>
-                            <td class="all-center"><input type="text" size="5"/></td>
+                            <td align="right">{{trainingLine.armyAmount}}</td>
+                            <td align="right">{{trainingLine.armyWounded}}</td>
+                            <td class="all-center"><input type="text" size="5" value="{{trainingLine.amount}}"/></td>
                             <td class="all-center"><input type="checkbox"></td>
-                            <td class="all-center"><input type="text" size="5"/></td>
+                            <td class="all-center"><input type="text" size="5" value="{{trainingLine.priority}}"/></td>
                             <td class="all-center">-1 %</td>
                             <td class="all-center">K 0.00 kör (-1%)</td>
                             <td class="all-center"><input type="checkbox"/></td>
