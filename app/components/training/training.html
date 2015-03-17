@@ -24,7 +24,7 @@
         </div>
         <div id="main-wrapper" class="col-md-10 pull-right">
             <div id="main">
-                <form>
+                <form name="trainingForm" novalidate>
                     <table class="table table-condensed table-bordered">
                         <tr class="success">
                             <td colspan="12" align="center">
@@ -51,21 +51,20 @@
                             <td>{{trainingLine.name}}</td>
                             <td align="right">{{trainingLine.armyAmount}}</td>
                             <td align="right">{{trainingLine.armyWounded}}</td>
-                            <td class="all-center"><input type="text" size="5" value="{{trainingLine.amount}}"/></td>
-                            <td class="all-center"><input type="checkbox"></td>
-                            <td class="all-center"><input type="text" size="5" value="{{trainingLine.priority}}"/></td>
+                            <td class="all-center"><input type="text" size="5" ng-model="trainingLine.amount"/></td>
+                            <td class="all-center"><input type="checkbox" ng-model="trainingLine.trainingFlag"></td>
+                            <td class="all-center"><input type="text" size="5" ng-model="trainingLine.priority"/></td>
                             <td class="all-center">-1 %</td>
                             <td class="all-center">K 0.00 kör (-1%)</td>
-                            <td class="all-center"><input type="checkbox"/></td>
-                            <td class="all-center"><input type="text" size="5"/></td>
-                            <td class="all-center"><input type="checkbox"/></td>
+                            <td class="all-center"><input type="checkbox" ng-model="trainingLine.cancelFlag"/></td>
+                            <td class="all-center"><input type="text" size="5" ng-model="trainingLine.disbandAmount"/></td>
+                            <td class="all-center"><input type="checkbox" ng-model="trainingLine.disbandFlag"/></td>
                         </tr>
                         <tr>
                             <td colspan="10">Stáuszok: S=Szülőhiány (kevés a munkanélküli vagy amiből az átképzés folyik), A=Anyaghiány (dénár, fegyver, stb.),
-                                K=Képzés (minden
-                                rendben)
+                                K=Képzés (minden rendben)
                             </td>
-                            <td class="all-center" colspan="2"><input type="button" value="Végrehajt"/></td>
+                            <td class="all-center" colspan="2"><input type="button" ng-click="updateTraining(trainingLines)" value="Végrehajt"/></td>
                         </tr>
                     </table>
 
@@ -73,5 +72,4 @@
             </div>
         </div>
     </div>
-
 </div>

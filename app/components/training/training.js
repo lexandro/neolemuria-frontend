@@ -34,6 +34,7 @@ angular.module('training', ['ngRoute'])
                                     function createTrainingLine(unitType, unit, trainings) {
                                         var result = {};
                                         result.unitType = unitType.name;
+                                        result.unitId = unit.id;
                                         result.name = unit.name;
                                         result.armyAmount = 0;
                                         result.armyWounded = 0;
@@ -46,6 +47,15 @@ angular.module('training', ['ngRoute'])
                                                 result.priority = training.priority;
                                             }
                                         });
+
+                                        armies.forEach(function (army) {
+                                            if (army.unitId === unit.id) {
+                                                result.armyAmount = army.amount;
+                                                result.armyWounded = army.wounded;
+                                            }
+
+                                        });
+
                                         trainingLines[trainingLines.length] = result;
                                         return result;
                                     }
@@ -75,8 +85,38 @@ angular.module('training', ['ngRoute'])
                         });
                     });
                 });
+            }
+            ;
+
+
+            $scope.updateTraining = function (trainingLines) {
+                var trainingRequests = [];
+                var cancelRequests = [];
+                var dismountRequests = [];
+                //
+                trainingLines.forEach(function (trainingLine) {
+                    if (hasTrueFlag("trainingFlag", trainingLine) && !hasTrueFlag("cancelFlag", trainingLine) && !hasTrueFlag("disbandFlag", trainingLine)) {
+                        console.log("training " + trainingLine);
+                    } else if (!hasTrueFlag("trainingFlag", trainingLine) && hasTrueFlag("cancelFlag", trainingLine) && !hasTrueFlag("disbandFlag", trainingLine)) {
+                        console.log("cancel " + trainingLine);
+                    } else if (!hasTrueFlag("trainingFlag", trainingLine) && !hasTrueFlag("cancelFlag", trainingLine) && hasTrueFlag("disbandFlag", trainingLine)) {
+                        console.log("disband " + trainingLine);
+                    } else {
+                        console.log("error " + trainingLine);
+                    }
+
+                });
 
             }
+
+            function hasTrueFlag(propertyName, object) {
+                if (object.hasOwnProperty(propertyName) && object[propertyName] == true) {
+                    return true;
+                }
+                return false;
+            }
+
+
             $scope.unitFilter = function (unit) {
                 return unit.level < 3;
             }
