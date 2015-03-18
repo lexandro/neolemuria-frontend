@@ -9,8 +9,8 @@ angular.module('training', ['ngRoute'])
         });
     }])
 
-    .controller('TrainingCtrl', ['$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType',
-        function ($rootScope, $scope, $location, Country, Unit, UnitType) {
+    .controller('TrainingCtrl', ['$route', '$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType',
+        function ($route, $rootScope, $scope, $location, Country, Unit, UnitType) {
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
@@ -22,9 +22,9 @@ angular.module('training', ['ngRoute'])
                         $rootScope.unitTypes = unitTypes;
                         var token = $rootScope.token;
 
-                        var armies = Country.armies(token.token).get({countryId: token.user.countryId}, function () {
+                        var armies = Country.armies(token.token).get(function () {
 
-                            var trainings = Country.trainings(token.token).get({countryId: token.user.countryId}, function () {
+                            var trainings = Country.trainings(token.token).query(function () {
                                 $scope.trainings = trainings;
                                 var maxLevel = 1;
                                 var trainingLines = [];
@@ -45,6 +45,8 @@ angular.module('training', ['ngRoute'])
                                             if (training.unitId === unit.id) {
                                                 result.amount = training.amount;
                                                 result.priority = training.priority;
+                                                result.mode = training.mode;
+                                                result.status = training.status;
                                             }
                                         });
 
@@ -55,7 +57,6 @@ angular.module('training', ['ngRoute'])
                                             }
 
                                         });
-
                                         trainingLines[trainingLines.length] = result;
                                         return result;
                                     }
@@ -86,42 +87,58 @@ angular.module('training', ['ngRoute'])
                     });
                 });
             }
-            ;
-
 
             $scope.updateTraining = function (trainingLines) {
                 var trainingRequests = [];
                 var cancelRequests = [];
-                var dismountRequests = [];
+                var disbandRequests = [];
                 //
                 trainingLines.forEach(function (trainingLine) {
-                    if (hasTrueFlag("trainingFlag", trainingLine) && !hasTrueFlag("cancelFlag", trainingLine) && !hasTrueFlag("disbandFlag", trainingLine)) {
-                        console.log("training " + trainingLine);
-                    } else if (!hasTrueFlag("trainingFlag", trainingLine) && hasTrueFlag("cancelFlag", trainingLine) && !hasTrueFlag("disbandFlag", trainingLine)) {
-                        console.log("cancel " + trainingLine);
-                    } else if (!hasTrueFlag("trainingFlag", trainingLine) && !hasTrueFlag("cancelFlag", trainingLine) && hasTrueFlag("disbandFlag", trainingLine)) {
-                        console.log("disband " + trainingLine);
-                    } else {
-                        console.log("error " + trainingLine);
+                        if (hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
+                            var trainingRequest = {};
+                            trainingRequest.unitId = trainingLine.unitId;
+                            trainingRequest.amount = trainingLine.amount;
+                            trainingRequest.priority = trainingLine.priority;
+                            trainingRequest.mode = trainingLine.mode;
+                            trainingRequests[trainingRequests.length] = trainingRequest;
+                        }
+                        else if (!hasTrueFlag(trainingLine, "trainingFlag") && hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
+                            if (trainingLine.hasOwnProperty('mode')) {
+                                var cancelRequest = {};
+                                cancelRequest.unitId = trainingLine.unitId;
+                                cancelRequest.trainingMode = trainingLine.mode;
+                                cancelRequests[cancelRequests.length] = cancelRequest;
+                            }
+                        } else if (!hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && hasTrueFlag(trainingLine, "disbandFlag")) {
+                            if (trainingLine.hasOwnProperty('disbandAmount') && trainingLine.disbandAmount > 0) {
+                                var disbandRequest = {};
+                                disbandRequest.unitId = trainingLine.unitId;
+                                disbandRequest.amount = trainingLine.disbandAmount;
+                                disbandRequests[disbandRequests.length] = disbandRequest;
+                            }
+                        }
                     }
+                )
+                // FIXME TRAININGMODE = not necessary!!!!!!!!!!!!!
 
-                });
-
-            }
-
-            function hasTrueFlag(propertyName, object) {
-                if (object.hasOwnProperty(propertyName) && object[propertyName] == true) {
-                    return true;
+                if (trainingRequests.length > 0) {
+                    console.log("training " + JSON.stringify(trainingRequests));
+                    var trainings = Country.trainings($rootScope.token.token).save(trainingRequests);
                 }
-                return false;
+                if (cancelRequests.length > 0) {
+                    console.log("cancel " + JSON.stringify(cancelRequests));
+                    var trainings = Country.trainings($rootScope.token.token).delete(cancelRequests);
+                }
+                if (disbandRequests.length > 0) {
+                    console.log("disband " + JSON.stringify(disbandRequests));
+                }
+                $route.reload();
+            };
+
+            function hasTrueFlag(object, propertyName) {
+                return !!(object.hasOwnProperty(propertyName) && object[propertyName] == true);
+
             }
-
-
-            $scope.unitFilter = function (unit) {
-                return unit.level < 3;
-            }
-
-
         }
     ])
 ;

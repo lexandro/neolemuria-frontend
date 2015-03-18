@@ -51,8 +51,22 @@ angular.module('services', [])
             },
             trainings: function (token) {
                 return $resource($rootScope.host + '/trainings', {}, {
-                    get: {
+                    query   : {
                         method: "GET",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
+                    },
+                    save: {
+                        method: "POST",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
+                    },
+                    cancel: {
+                        method: "DELETE",
                         isArray: true,
                         headers: {
                             'userToken': token
