@@ -13,7 +13,7 @@ angular.module('login', ['ngRoute'])
         $scope.update = function (user) {
             $scope.master = angular.copy(user);
             var entry = new Authentication();
-            entry.$save(function () {
+            entry.$save({username: user.name, password: user.password}, function () {
                 console.log("LoginCtrl returned json: " + JSON.stringify(entry));
                 $rootScope.token = entry;
                 $location.path('main');

@@ -18,8 +18,8 @@ angular.module('neoLemuriaApp', [
 ])
     .run(function ($rootScope) {
         $rootScope.token = "";
-        $rootScope.host = "http://localhost:8080";
-        //$rootScope.host = "http://neolemuria.com:8080";
+        //$rootScope.host = "http://localhost:8080";
+        $rootScope.host = "http://neolemuria.com:8080";
         //
         $rootScope.sidemenu = 'app/shared/sidemenu.html';
         console.log("Rootscope initialized");

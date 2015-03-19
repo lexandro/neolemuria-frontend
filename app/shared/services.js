@@ -1,7 +1,7 @@
 angular.module('services', [])
 
     .factory('Authentication', function ($resource, $rootScope) {
-        entry = $resource($rootScope.host + '/authentication/accessTokens?username=tester&password=test1234', {});
+        entry = $resource($rootScope.host + '/authentication/accessTokens?username=:username&password=:password', {});
 
         return entry;
     })
