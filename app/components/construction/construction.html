@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div id="wrapper">
+        <div ng-include="$root.sidemenu"></div>
+    </div>
+    <div id="main-wrapper" class="col-md-10 pull-right">
+        <div id="main">
+            <form name="constructionForm" novalidate>
+                <table class="table table-condensed table-bordered">
+                    <tr class="success">
+                        <td colspan="12" align="center">Építkezés</td>
+                    </tr>
+
+                    <tr>
+                        <td width="10%" class="all-center">Épület</td>
+                        <td width="7%" class="all-center">Van</td>
+                        <td width="7%" class="all-center">Építhető</td>
+                        <td width="7%" class="all-center" colspan="2">Építés</td>
+                        <td width="7%" class="all-center" colspan="2">Fontosság</td>
+                        <td width="7%" class="all-center" colspan="2">Lebontás</td>
+                        <td width="7%" class="all-center" colspan="2">Leállít</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7">Stáuszok: S=Szülőhiány (nincs üres terület vagz átépíthető épület), A=Anyaghiány (dénár, fa, kő, stb.),
+                            E=Építés (minden rendben), B!=Bintás
+                        </td>
+                        <td class="all-center" colspan="4"><input type="button" ng-click="updateConstruction(constructionLines)" value="Végrehajt"/></td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>

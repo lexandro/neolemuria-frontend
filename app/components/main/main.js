@@ -10,6 +10,7 @@ angular.module('main', ['ngRoute'])
     }])
 
     .controller('MainCtrl', ['$rootScope', '$scope', '$location', 'Country', function ($rootScope, $scope, $location, Country) {
+
         if ($rootScope.token.length < 1) {
             $location.path('login');
         } else {

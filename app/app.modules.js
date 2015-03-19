@@ -10,6 +10,10 @@ angular.module('neoLemuriaApp', [
     'login',
     'main',
     'training',
+    'construction',
+    'attack',
+    'discovery',
+    'settings',
     'logout'
 ])
     .run(function ($rootScope) {
@@ -17,6 +21,7 @@ angular.module('neoLemuriaApp', [
         $rootScope.host = "http://localhost:8080";
         //$rootScope.host = "http://neolemuria.com:8080";
         //
+        $rootScope.sidemenu = 'app/shared/sidemenu.html';
         console.log("Rootscope initialized");
     })
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
