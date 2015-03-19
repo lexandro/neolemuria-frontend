@@ -92,6 +92,7 @@ angular.module('training', ['ngRoute'])
                 var trainingRequests = [];
                 var cancelRequests = [];
                 var disbandRequests = [];
+                var counter = 0;
                 //
                 trainingLines.forEach(function (trainingLine) {
                         if (hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
@@ -99,42 +100,43 @@ angular.module('training', ['ngRoute'])
                             trainingRequest.unitId = trainingLine.unitId;
                             trainingRequest.amount = trainingLine.amount;
                             trainingRequest.priority = trainingLine.priority;
-                            trainingRequest.mode = trainingLine.mode;
-                            trainingRequests[trainingRequests.length] = trainingRequest;
+                            trainingRequests.push(trainingRequest);
                         }
                         else if (!hasTrueFlag(trainingLine, "trainingFlag") && hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
                             if (trainingLine.hasOwnProperty('mode')) {
                                 var cancelRequest = {};
                                 cancelRequest.unitId = trainingLine.unitId;
-                                cancelRequests[cancelRequests.length] = cancelRequest;
+                                cancelRequests.push(cancelRequest);
                             }
                         } else if (!hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && hasTrueFlag(trainingLine, "disbandFlag")) {
                             if (trainingLine.hasOwnProperty('disbandAmount') && trainingLine.disbandAmount > 0) {
                                 var disbandRequest = {};
                                 disbandRequest.unitId = trainingLine.unitId;
                                 disbandRequest.amount = trainingLine.disbandAmount;
-                                disbandRequests[disbandRequests.length] = disbandRequest;
+                                disbandRequests.push(disbandRequest);
                             }
                         }
                     }
                 )
-                // FIXME TRAININGMODE = not necessary!!!!!!!!!!!!!
-
                 if (trainingRequests.length > 0) {
                     console.log("training " + JSON.stringify(trainingRequests));
-                    var trainings = Country.trainings($rootScope.token.token).save(trainingRequests);
+                    var trainings = Country.trainings($rootScope.token.token).save(trainingRequests, function () {
+                        $route.reload();
+                    });
                 }
                 if (cancelRequests.length > 0) {
                     console.log("cancel " + JSON.stringify(cancelRequests));
                     cancelRequests.forEach(function (cancelRequest) {
-                        var trainings = Country.trainings($rootScope.token.token).cancel({unitId: cancelRequest.unitId});
+                        var trainings = Country.trainings($rootScope.token.token).cancel({unitId: cancelRequest.unitId}, function () {
+                            $route.reload();
+                        });
                     });
 
                 }
                 if (disbandRequests.length > 0) {
                     console.log("disband " + JSON.stringify(disbandRequests));
                 }
-                $route.reload();
+
             };
 
             function hasTrueFlag(object, propertyName) {
