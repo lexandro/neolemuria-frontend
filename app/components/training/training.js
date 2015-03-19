@@ -88,11 +88,11 @@ angular.module('training', ['ngRoute'])
                 });
             }
 
-            $scope.updateTraining = function (trainingLines) {
+            $scope.updateTraining = function () {
                 var trainingRequests = [];
                 var cancelRequests = [];
                 var disbandRequests = [];
-                var counter = 0;
+                var trainingLines = $scope.trainingLines;
                 //
                 trainingLines.forEach(function (trainingLine) {
                         if (hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
