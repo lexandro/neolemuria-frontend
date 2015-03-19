@@ -106,7 +106,6 @@ angular.module('training', ['ngRoute'])
                             if (trainingLine.hasOwnProperty('mode')) {
                                 var cancelRequest = {};
                                 cancelRequest.unitId = trainingLine.unitId;
-                                cancelRequest.trainingMode = trainingLine.mode;
                                 cancelRequests[cancelRequests.length] = cancelRequest;
                             }
                         } else if (!hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && hasTrueFlag(trainingLine, "disbandFlag")) {
@@ -127,7 +126,10 @@ angular.module('training', ['ngRoute'])
                 }
                 if (cancelRequests.length > 0) {
                     console.log("cancel " + JSON.stringify(cancelRequests));
-                    var trainings = Country.trainings($rootScope.token.token).delete(cancelRequests);
+                    cancelRequests.forEach(function (cancelRequest) {
+                        var trainings = Country.trainings($rootScope.token.token).cancel({unitId: cancelRequest.unitId});
+                    });
+
                 }
                 if (disbandRequests.length > 0) {
                     console.log("disband " + JSON.stringify(disbandRequests));

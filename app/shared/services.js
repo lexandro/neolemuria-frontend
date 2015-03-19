@@ -50,8 +50,8 @@ angular.module('services', [])
                 });
             },
             trainings: function (token) {
-                return $resource($rootScope.host + '/trainings', {}, {
-                    query   : {
+                return $resource($rootScope.host + '/trainings/:unitId', {}, {
+                    query: {
                         method: "GET",
                         isArray: true,
                         headers: {
@@ -67,7 +67,7 @@ angular.module('services', [])
                     },
                     cancel: {
                         method: "DELETE",
-                        isArray: true,
+                        isArray: false,
                         headers: {
                             'userToken': token
                         }
