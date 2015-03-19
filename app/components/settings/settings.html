@@ -5,52 +5,79 @@
     </div>
     <div id="main-wrapper" class="col-md-10 pull-right">
         <div id="main">
-            <form name="trainingForm" novalidate>
+            <form name="settingsForm" novalidate>
                 <table class="table table-condensed table-bordered">
                     <tr class="success">
-                        <td colspan="12" align="center">
-                            Képzés
+                        <td colspan="3" align="center">
+                            Pénzügy
                         </td>
                     </tr>
 
                     <tr>
-                        <td width="10%" class="all-center" rowspan="2">Fajta</td>
-                        <td width="10%" class="all-center" rowspan="2">Egység</td>
-                        <td width="7%" class="all-center" rowspan="2">Van</td>
-                        <td width="7%" class="all-center" rowspan="2">Sebesült</td>
-                        <td width="10%" class="all-center" colspan="2">Képzés</td>
-                        <td width="13%" class="all-center" rowspan="2" colspan="2">Fontosság</td>
-                        <td width="13%" class="all-center" rowspan="2">Státusz</td>
-                        <td width="5%" class="all-center" rowspan="2">Leállít</td>
-                        <td width="10%" class="all-center" rowspan="2" colspan="2">Lefokoz</td>
+                        <td width="10%" class="all-center">Adókulcs</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">BeállítBTN</td>
                     </tr>
                     <tr>
-                        <td width="10%" align="center" colspan="2">Átképzés</td>
-                    </tr>
-                    <tr ng-repeat="trainingLine in trainingLines">
-                        <td class="all-center">{{trainingLine.unitType}}</td>
-                        <td>{{trainingLine.name}}</td>
-                        <td align="right">{{trainingLine.armyAmount}}</td>
-                        <td align="right">{{trainingLine.armyWounded}}</td>
-                        <td class="all-center"><input type="text" size="5" ng-model="trainingLine.amount"/></td>
-                        <td class="all-center"><input type="checkbox" ng-model="trainingLine.trainingFlag"></td>
-                        <td class="all-center"><input type="text" size="5" ng-model="trainingLine.priority"/></td>
-                        <td class="all-center">-1 %</td>
-                        <td class="all-center">K 0.00 kör (-1%)</td>
-                        <td class="all-center"><input type="checkbox" ng-model="trainingLine.cancelFlag"/></td>
-                        <td class="all-center"><input type="text" size="5" ng-model="trainingLine.disbandAmount"/></td>
-                        <td class="all-center"><input type="checkbox" ng-model="trainingLine.disbandFlag"/></td>
+                        <td width="10%" class="all-center">Egységek zsoldja és fogyasztása (alap: 100%)</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">BeállítBTN</td>
                     </tr>
                     <tr>
-                        <td colspan="10">Stáuszok: S=Szülőhiány (kevés a munkanélküli vagy amiből az átképzés folyik), A=Anyaghiány (dénár, fegyver, stb.),
-                            K=Képzés (minden rendben)
+                        <td width="10%" class="all-center">Pénz osztása a hadseregnek</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">SzétosztBTN</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="all-center">Pénz osztása a népnek</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">SzétosztBTN</td>
+                    </tr>
+                </table>
+
+
+                <table class="table table-condensed table-bordered">
+                    <tr class="success">
+                        <td colspan="4" align="center">
+                            Korszakváltás
                         </td>
-                        <td class="all-center" colspan="2"><input type="button" ng-click="updateTraining(trainingLines)" value="Végrehajt"/></td>
+                    </tr>
+
+                    <tr>
+                        <td width="50%" class="all-center" colspan="2">Jelenlegi korszak: #0, Nincs</td>
+                        <td width="50%" class="all-center" colspan="2">Következő korszak: #1, Nincs+1</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="all-center">A korszakváltás feltételei</td>
+                        <td width="10%" class="all-center">Jelenleg</td>
+                        <td width="10%" class="all-center">Szükséges</td>
+                        <td width="10%" class="all-center">Teljesítve</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="all-center">Pontszám</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">Nem</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="all-center">Játékidő</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">-1</td>
+                        <td width="10%" class="all-center">Nem</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" class="all-center">Találmány</td>
+                        <td width="10%" class="all-center">-</td>
+                        <td width="10%" class="all-center">-</td>
+                        <td width="10%" class="all-center">Nem</td>
+                    </tr>
+                    <tr>
+                        <td width="50%" class="all-center" colspan="2"></td>
+                        <td width="50%" class="all-center" colspan="2">KorszakváltásBTN</td>
                     </tr>
                 </table>
 
             </form>
         </div>
     </div>
-</div>
 </div>
