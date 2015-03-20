@@ -45,6 +45,31 @@ angular.module('services', [])
                     }
                 });
             },
+            constructions: function (token) {
+                return $resource($rootScope.host + '/constructions/:buildingId', {}, {
+                    query: {
+                        method: "GET",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
+                    },
+                    save: {
+                        method: "POST",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
+                    },
+                    cancel: {
+                        method: "DELETE",
+                        isArray: false,
+                        headers: {
+                            'userToken': token
+                        }
+                    }
+                });
+            },
             lands: function (token) {
                 return $resource($rootScope.host + '/lands?countryId=:countryId', {}, {
                     query: {

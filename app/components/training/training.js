@@ -146,5 +146,4 @@ angular.module('training', ['ngRoute'])
 
             }
         }
-    ])
-;
+    ]);
