@@ -131,12 +131,13 @@ angular.module('training', ['ngRoute'])
                             $route.reload();
                         });
                     });
-
                 }
                 if (disbandRequests.length > 0) {
                     console.log("disband " + JSON.stringify(disbandRequests));
+                    var trainings = Country.armies($rootScope.token.token).disband(disbandRequests, function () {
+                        $route.reload();
+                    });
                 }
-
             };
 
             function hasTrueFlag(object, propertyName) {

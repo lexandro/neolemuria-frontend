@@ -35,6 +35,13 @@ angular.module('services', [])
                         headers: {
                             'userToken': token
                         }
+                    },
+                    disband: {
+                        method: "POST",
+                        isArray: true,
+                        headers: {
+                            'userToken': token
+                        }
                     }
                 });
             },
