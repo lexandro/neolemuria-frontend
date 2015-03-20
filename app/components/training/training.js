@@ -40,6 +40,7 @@ angular.module('training', ['ngRoute'])
                                         result.armyWounded = 0;
                                         result.amount = 0;
                                         result.priority = 0;
+                                        result.disbandAmount = "";
                                         //
                                         trainings.forEach(function (training) {
                                             if (training.unitId === unit.id) {
@@ -117,17 +118,17 @@ angular.module('training', ['ngRoute'])
                             }
                         }
                     }
-                )
+                );
                 if (trainingRequests.length > 0) {
                     console.log("training " + JSON.stringify(trainingRequests));
-                    var trainings = Country.trainings($rootScope.token.token).save(trainingRequests, function () {
+                    trainings = Country.trainings($rootScope.token.token).save(trainingRequests, function () {
                         $route.reload();
                     });
                 }
                 if (cancelRequests.length > 0) {
                     console.log("cancel " + JSON.stringify(cancelRequests));
                     cancelRequests.forEach(function (cancelRequest) {
-                        var trainings = Country.trainings($rootScope.token.token).cancel({unitId: cancelRequest.unitId}, function () {
+                        trainings = Country.trainings($rootScope.token.token).cancel({unitId: cancelRequest.unitId}, function () {
                             $route.reload();
                         });
                     });
