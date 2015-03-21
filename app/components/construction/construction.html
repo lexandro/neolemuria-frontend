@@ -23,12 +23,12 @@
                     </tr>
                     <tr ng-repeat="constructionTask in constructionTasks">
                         <td class="all-center">{{constructionTask.name}}</td>
-                        <td>{{constructionTask.buildingAmount}}</td>
-                        <td>{{constructionTask.parentAmount}}</td>
+                        <td align="right">{{constructionTask.buildingAmount}} ({{constructionTask.buildingPercentage}}%)</td>
+                        <td align="right">{{constructionTask.parentAmount}}</td>
                         <td class="all-center"><input type="text" size="5" ng-model="constructionTask.constructionAmount"/></td>
                         <td class="all-center"><input type="checkbox" ng-model="constructionTask.constructionFlag"/></td>
                         <td class="all-center"><input type="text" size="3" ng-model="constructionTask.priority"/></td>
-                        <td class="all-center">-1</td>
+                        <td class="right">-1</td>
                         <td class="all-center">?</td>
                         <td class="all-center"><input type="text" size="5" ng-model="constructionTask.demolishAmount"/></td>
                         <td class="all-center"><input type="checkbox" ng-model="constructionTask.demolishFlag"/></td>
