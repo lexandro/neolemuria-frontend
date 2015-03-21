@@ -9,8 +9,8 @@ angular.module('training', ['ngRoute'])
         });
     }])
 
-    .controller('TrainingCtrl', ['$route', '$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType',
-        function ($route, $rootScope, $scope, $location, Country, Unit, UnitType) {
+    .controller('TrainingCtrl', ['$route', '$rootScope', '$scope', '$location', 'Helpers', 'Country', 'Unit', 'UnitType',
+        function ($route, $rootScope, $scope, $location, Helpers, Country, Unit, UnitType) {
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
@@ -96,20 +96,20 @@ angular.module('training', ['ngRoute'])
                 var trainingLines = $scope.trainingLines;
                 //
                 trainingLines.forEach(function (trainingLine) {
-                        if (hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
+                        if (Helpers.hasTrueFlag(trainingLine, "trainingFlag") && !Helpers.hasTrueFlag(trainingLine, "cancelFlag") && !Helpers.hasTrueFlag(trainingLine, "disbandFlag")) {
                             var trainingRequest = {};
                             trainingRequest.unitId = trainingLine.unitId;
                             trainingRequest.amount = trainingLine.amount;
                             trainingRequest.priority = trainingLine.priority;
                             trainingRequests.push(trainingRequest);
                         }
-                        else if (!hasTrueFlag(trainingLine, "trainingFlag") && hasTrueFlag(trainingLine, "cancelFlag") && !hasTrueFlag(trainingLine, "disbandFlag")) {
+                        else if (!Helpers.hasTrueFlag(trainingLine, "trainingFlag") && Helpers.hasTrueFlag(trainingLine, "cancelFlag") && !Helpers.hasTrueFlag(trainingLine, "disbandFlag")) {
                             if (trainingLine.hasOwnProperty('mode')) {
                                 var cancelRequest = {};
                                 cancelRequest.unitId = trainingLine.unitId;
                                 cancelRequests.push(cancelRequest);
                             }
-                        } else if (!hasTrueFlag(trainingLine, "trainingFlag") && !hasTrueFlag(trainingLine, "cancelFlag") && hasTrueFlag(trainingLine, "disbandFlag")) {
+                        } else if (!Helpers.hasTrueFlag(trainingLine, "trainingFlag") && !Helpers.hasTrueFlag(trainingLine, "cancelFlag") && Helpers.hasTrueFlag(trainingLine, "disbandFlag")) {
                             if (trainingLine.hasOwnProperty('disbandAmount') && trainingLine.disbandAmount > 0) {
                                 var disbandRequest = {};
                                 disbandRequest.unitId = trainingLine.unitId;
@@ -140,10 +140,5 @@ angular.module('training', ['ngRoute'])
                     });
                 }
             };
-
-            function hasTrueFlag(object, propertyName) {
-                return !!(object.hasOwnProperty(propertyName) && object[propertyName] == true);
-
-            }
         }
     ]);

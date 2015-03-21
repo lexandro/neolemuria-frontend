@@ -32,15 +32,15 @@
                         <td class="all-center">?</td>
                         <td class="all-center"><input type="text" size="5" ng-model="constructionTask.demolishAmount"/></td>
                         <td class="all-center"><input type="checkbox" ng-model="constructionTask.demolishFlag"/></td>
-                        <td class="all-center"><input type="checkbox" ng-model="constructionTask.canceFlag"/></td>
+                        <td class="all-center"><input type="checkbox" ng-model="constructionTask.cancelFlag"/></td>
                     </tr>
 
 
                     <tr>
-                        <td colspan="7">Státuszok: S=Szülőhiány (nincs üres terület vagz átépíthető épület), A=Anyaghiány (dénár, fa, kő, stb.),
+                        <td colspan="8">Státuszok: S=Szülőhiány (nincs üres terület vagz átépíthető épület), A=Anyaghiány (dénár, fa, kő, stb.),
                             E=Építés (minden rendben), B!=Bintás
                         </td>
-                        <td class="all-center" colspan="4"><input type="button" ng-click="updateConstruction(constructionLines)" value="Végrehajt"/></td>
+                        <td class="all-center" colspan="4"><input type="button" ng-click="updateConstruction(constructionTasks)" value="Végrehajt"/></td>
                     </tr>
                 </table>
 

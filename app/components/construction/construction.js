@@ -11,11 +11,9 @@ angular.module('construction', ['ngRoute'])
 
     .controller('ConstructionCtrl', ['$route', '$rootScope', '$scope', '$location', 'Helpers', 'Country', 'Building',
         function ($route, $rootScope, $scope, $location, Helpers, Country, Building) {
-            console.log('construction');
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
-                console.log('construction enter');
                 var buildings = Building.all().query(function () {
                     $rootScope.buildings = buildings;
                     var token = $rootScope.token;
@@ -27,10 +25,8 @@ angular.module('construction', ['ngRoute'])
                             lands.forEach(function (land) {
                                 sumOfLands += land.amount;
                             });
-
                             buildings.forEach(function (building) {
                                 if (building.level < 2 && building.buildable === true) {
-
                                     var parentAmount = getParent(building, lands);
                                     if (parentAmount > 0) {
                                         var constructionTask = {};
@@ -55,15 +51,14 @@ angular.module('construction', ['ngRoute'])
                                             constructionTask.constructionAmount = 0;
                                             constructionTask.priority = 10;
                                         }
-
-                                        constructionTask.buildingFlag = false;
+                                        constructionTask.constructionFlag = false;
                                         constructionTask.demolishFlag = false;
                                         constructionTask.cancelFlag = false;
                                         constructionTasks.push(constructionTask);
                                     }
                                 }
                             });
-
+                            //
                             function getParent(building, lands) {
                                 var result = 0;
                                 lands.some(function (land) {
@@ -75,6 +70,7 @@ angular.module('construction', ['ngRoute'])
                                 return result;
                             }
 
+                            //
                             function getEntryFrom(building, array) {
                                 var result = {};
                                 array.some(function (item) {
@@ -86,11 +82,39 @@ angular.module('construction', ['ngRoute'])
                                 return result
                             }
 
-
                             $scope.constructionTasks = constructionTasks;
                         });
                     });
+
                 });
+                //
+                $scope.updateConstruction = function (constructionTasks) {
+                    var constructionRequests = [];
+                    var cancelRequests = [];
+                    constructionTasks.forEach(function (constructionTask) {
+                        if (Helpers.hasTrueFlag(constructionTask, "constructionFlag") && !Helpers.hasTrueFlag(constructionTask, "demolishFlag") && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
+                            var constructionRequest = {};
+                            constructionRequest.id = constructionTask.id;
+                            constructionRequest.amount = constructionTask.constructionAmount;
+                            constructionRequest.priority = constructionTask.priority;
+                            constructionRequests.push(constructionRequest);
+                        } else if (!Helpers.hasTrueFlag(constructionTask, "constructionFlag") && Helpers.hasTrueFlag(constructionTask, "demolishFlag") && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
+                            var constructionRequest = {};
+                            constructionRequest.id = constructionTask.id;
+                            constructionRequest.amount = -constructionTask.demolishAmount;
+                            constructionRequest.priority = constructionTask.priority;
+                            constructionRequests.push(constructionRequest);
+                        } else if (!Helpers.hasTrueFlag(constructionTask, "constructionFlag") && !Helpers.hasTrueFlag(constructionTask, "demolishFlag") && Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
+                            var cancelRequest = {};
+                            cancelRequest.id = constructionTask.id;
+                            cancelRequests.push(cancelRequest);
+                        }
+                    });
+                    console.log("cancelRequests " + JSON.stringify(cancelRequests));
+                    console.log("constructionRequests " + JSON.stringify(constructionRequests));
+                    $route.reload();
+                }
+
             }
         }]);
 

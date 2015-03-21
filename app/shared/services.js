@@ -20,7 +20,11 @@ angular.module('services', [])
                 }
 
                 return true;
+            },
+            hasTrueFlag: function hasTrueFlag(object, propertyName) {
+                return !!(object.hasOwnProperty(propertyName) && object[propertyName] == true);
             }
+
         }
     })
 
