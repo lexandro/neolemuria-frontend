@@ -15,9 +15,21 @@ angular.module('attack', ['ngRoute'])
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
-                console.log('attack enter');
+                var units = Unit.all().query(function () {
+                    $rootScope.units = units;
+                    $scope.units = $rootScope.units;
+                    var unitTypes = UnitType.all().query(function () {
+                        $scope.unitTypes = unitTypes;
+                        $rootScope.unitTypes = unitTypes;
+                        var token = $rootScope.token;
+                        var armies = Country.armies(token.token).get(function () {
+
+
+                        });
+                    });
+                });
+
             }
 
         }
-    ])
-;
+    ]);
