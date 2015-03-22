@@ -45,10 +45,14 @@ angular.module('construction', ['ngRoute'])
                                         }
                                         //
                                         if (!Helpers.isEmpty(construction)) {
-                                            constructionTask.constructionAmount = construction.amount;
-                                            constructionTask.priority = construction.priority;
+                                            if (construction.amount > 0) {
+                                                constructionTask.constructionAmount = construction.amount;
+                                                constructionTask.priority = construction.priority;
+                                            } else {
+                                                constructionTask.demolishAmount = Math.abs(construction.amount);
+                                                constructionTask.priority = construction.priority;
+                                            }
                                         } else {
-                                            constructionTask.constructionAmount = 0;
                                             constructionTask.priority = 10;
                                         }
                                         constructionTask.constructionFlag = false;
@@ -92,29 +96,43 @@ angular.module('construction', ['ngRoute'])
                     var constructionRequests = [];
                     var cancelRequests = [];
                     constructionTasks.forEach(function (constructionTask) {
-                        if (Helpers.hasTrueFlag(constructionTask, "constructionFlag") && !Helpers.hasTrueFlag(constructionTask, "demolishFlag") && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
+                        if (Helpers.hasTrueFlag(constructionTask, "constructionFlag")
+                            && !Helpers.hasTrueFlag(constructionTask, "demolishFlag")
+                            && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")
+                            && constructionTask.constructionAmount > 0) {
                             var constructionRequest = {};
-                            constructionRequest.id = constructionTask.id;
+                            constructionRequest.buildingId = constructionTask.id;
                             constructionRequest.amount = constructionTask.constructionAmount;
                             constructionRequest.priority = constructionTask.priority;
                             constructionRequests.push(constructionRequest);
-                        } else if (!Helpers.hasTrueFlag(constructionTask, "constructionFlag") && Helpers.hasTrueFlag(constructionTask, "demolishFlag") && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
+                        }
+                        else if (!Helpers.hasTrueFlag(constructionTask, "constructionFlag")
+                            && Helpers.hasTrueFlag(constructionTask, "demolishFlag")
+                            && !Helpers.hasTrueFlag(constructionTask, "cancelFlag")
+                            && constructionTask.demolishAmount > 0) {
                             var constructionRequest = {};
-                            constructionRequest.id = constructionTask.id;
+                            constructionRequest.buildingId = constructionTask.id;
                             constructionRequest.amount = -constructionTask.demolishAmount;
                             constructionRequest.priority = constructionTask.priority;
                             constructionRequests.push(constructionRequest);
                         } else if (!Helpers.hasTrueFlag(constructionTask, "constructionFlag") && !Helpers.hasTrueFlag(constructionTask, "demolishFlag") && Helpers.hasTrueFlag(constructionTask, "cancelFlag")) {
-                            var cancelRequest = {};
-                            cancelRequest.id = constructionTask.id;
-                            cancelRequests.push(cancelRequest);
+                            cancelRequests.push(constructionTask.id);
                         }
                     });
-                    console.log("cancelRequests " + JSON.stringify(cancelRequests));
-                    console.log("constructionRequests " + JSON.stringify(constructionRequests));
-                    $route.reload();
+                    if (constructionRequests.length > 0) {
+                        Country.constructions($rootScope.token.token).save(constructionRequests, function () {
+                            $route.reload();
+                        });
+                    }
+                    //
+                    if (cancelRequests.length > 0) {
+                        cancelRequests.forEach(function (cancelRequest) {
+                            Country.constructions($rootScope.token.token).cancel({buildingId: cancelRequest}, function () {
+                                $route.reload();
+                            });
+                        });
+                    }
                 }
-
             }
         }]);
 
