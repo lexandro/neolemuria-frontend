@@ -17,15 +17,30 @@
                         <td width="7%" class="all-center">Építhető</td>
                         <td width="7%" class="all-center" colspan="2">Építés</td>
                         <td width="7%" class="all-center" colspan="2">Fontosság</td>
+                        <td width="7%" class="all-center">Státusz</td>
                         <td width="7%" class="all-center" colspan="2">Lebontás</td>
                         <td width="7%" class="all-center" colspan="2">Leállít</td>
                     </tr>
+                    <tr ng-repeat="constructionTask in constructionTasks">
+                        <td class="all-center">{{constructionTask.name}}</td>
+                        <td align="right">{{constructionTask.buildingAmount}} ({{constructionTask.buildingPercentage}}%)</td>
+                        <td align="right">{{constructionTask.parentAmount}}</td>
+                        <td class="all-center"><input type="text" size="5" ng-model="constructionTask.constructionAmount"/></td>
+                        <td class="all-center"><input type="checkbox" ng-model="constructionTask.constructionFlag"/></td>
+                        <td class="all-center"><input type="text" size="3" ng-model="constructionTask.priority"/></td>
+                        <td class="right">-1</td>
+                        <td class="all-center">?</td>
+                        <td class="all-center"><input type="text" size="5" ng-model="constructionTask.demolishAmount"/></td>
+                        <td class="all-center"><input type="checkbox" ng-model="constructionTask.demolishFlag"/></td>
+                        <td class="all-center"><input type="checkbox" ng-model="constructionTask.cancelFlag"/></td>
+                    </tr>
+
 
                     <tr>
-                        <td colspan="7">Stáuszok: S=Szülőhiány (nincs üres terület vagz átépíthető épület), A=Anyaghiány (dénár, fa, kő, stb.),
+                        <td colspan="8">Státuszok: S=Szülőhiány (nincs üres terület vagz átépíthető épület), A=Anyaghiány (dénár, fa, kő, stb.),
                             E=Építés (minden rendben), B!=Bintás
                         </td>
-                        <td class="all-center" colspan="4"><input type="button" ng-click="updateConstruction(constructionLines)" value="Végrehajt"/></td>
+                        <td class="all-center" colspan="4"><input type="button" ng-click="updateConstruction(constructionTasks)" value="Végrehajt"/></td>
                     </tr>
                 </table>
 
