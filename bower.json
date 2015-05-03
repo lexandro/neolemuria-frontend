@@ -1,7 +1,7 @@
 {
   "name": "neolemuria-frontend",
   "description": "A fronted for NeoLemuria.com",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "homepage": "http://neolemuria.com",
   "private": true,
   "dependencies": {
