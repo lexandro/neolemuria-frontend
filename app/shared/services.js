@@ -130,6 +130,13 @@ angular.module('services', [])
             }
         }
     })
+    .factory('AttackType', function ($resource, $rootScope) {
+        return {
+            all: function () {
+                return $resource($rootScope.host + '/attackTypes', {});
+            }
+        }
+    })
     .factory('Unit', function ($resource, $rootScope) {
         return {
             all: function () {
@@ -140,7 +147,7 @@ angular.module('services', [])
     .factory('UnitType', function ($resource, $rootScope) {
         return {
             all: function () {
-                var unitTypes = $resource($rootScope.host + '/unittypes', {});
+                var unitTypes = $resource($rootScope.host + '/unitTypes', {});
                 $rootScope.units = unitTypes;
                 return unitTypes;
             }

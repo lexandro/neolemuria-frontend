@@ -9,33 +9,24 @@ angular.module('attack', ['ngRoute'])
         });
     }])
 
-    .controller('AttackCtrl', ['$route', '$rootScope', '$scope', '$location', 'Country', 'Unit', 'UnitType',
-        function ($route, $rootScope, $scope, $location, Country, Unit, UnitType) {
+    .controller('AttackCtrl', ['$route', '$rootScope', '$scope', '$location', 'Country',
+        function ($route, $rootScope, $scope, $location, Country) {
             console.log('attack');
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
-                var units = Unit.all().query(function () {
-                    $rootScope.units = units;
-                    $scope.units = $rootScope.units;
-                    var unitTypes = UnitType.all().query(function () {
-                        $scope.unitTypes = unitTypes;
-                        $rootScope.unitTypes = unitTypes;
-                        var token = $rootScope.token;
-                        var armies = Country.armies(token.token).get(function () {
-                            var attackArmies = [];
-                            $scope.unitTypes.forEach(function (unitType) {
-                            // http://stackoverflow.com/questions/6298169/how-to-create-a-map-object-in-a-javascript
-                            //    map-es megoldast a dictionarykra
+                $scope.units = $rootScope.units;
+                $scope.unitTypes = $rootScope.unitTypes;
+                var token = $rootScope.token;
 
-                            });
+                var armies = Country.armies(token.token).get(function () {
+                    var attackArmies = [];
+                    $scope.unitTypes.forEach(function (unitType) {
+                        // http://stackoverflow.com/questions/6298169/how-to-create-a-map-object-in-a-javascript
+                        //    map-es megoldast a dictionarykra
 
-
-                        });
                     });
                 });
-
             }
-
         }
     ]);
