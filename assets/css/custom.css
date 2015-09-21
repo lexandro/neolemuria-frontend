@@ -1,3 +1,12 @@
+.vcenter {
+    vertical-align: bottom;
+    margin-top: 6px
+}
+
+.bold {
+    font-weight: bold;
+}
+
 body {
     background: url('../img/szilankvilag.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;

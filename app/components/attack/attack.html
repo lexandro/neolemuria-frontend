@@ -16,7 +16,7 @@
                     <tr class="info">
                         <td colspan="6" align="center">
                             Úton lévő seregek
-                         </td>
+                        </td>
                     </tr>
                     <tr class="info">
                         <td colspan="6" align="center">
@@ -53,16 +53,32 @@
                         <td class="all-center"></td>
                         <td class="all-center"></td>
                     </tr>
-                    <tr>
+                    <tr class="info">
                         <td class="all-center"></td>
-                        <td class="all-center">Egység</td>
-                        <td class="all-center">Sebesült</td>
-                        <td class="all-center">Pihen</td>
-                        <td class="all-center">Bevethető</td>
-                        <td class="all-center">Előkészít</td>
+                        <td class="all-center"><strong>Egység</strong></td>
+                        <td class="all-center"><strong>Sebesült</strong></td>
+                        <td class="all-center"><strong>Pihen</strong></td>
+                        <td class="all-center"><strong>Bevethető</strong></td>
+                        <td class="all-center"><strong>Előkészít</strong></td>
                     </tr>
-                    <tr ng-repeat="">
 
+                    <tr ng-repeat="homeArmy in homeArmies">
+                        <td class="all-center">&nbsp;</td>
+                        <td class="text-left bold">
+                            <div class="vcenter">{{homeArmy.name}}</div>
+                        </td>
+                        <td class="text-right">
+                            <div class="vcenter">{{homeArmy.wounded}}</div>
+                        </td>
+                        <td class="text-right">
+                            <div class="vcenter">{{homeArmy.resting}}</div>
+                        </td>
+                        <td class="text-right">
+                            <div class="vcenter">{{homeArmy.amount}}</div>
+                        </td>
+                        <td class="all-center">
+                            <div class="vcenter"><input class="form-control" ng-model="homeArmy.prepared"/></div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="all-center">Akció</td>

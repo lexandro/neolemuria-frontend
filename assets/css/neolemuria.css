@@ -1,5 +1,14 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+.vcenter {
+    vertical-align: bottom;
+    margin-top: 6px
+}
+
+.bold {
+    font-weight: bold;
+}
+
 html {
     position: relative;
     min-height: 100%;
