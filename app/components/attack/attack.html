@@ -7,48 +7,48 @@
         <div id="main">
             <form name="attackForm" novalidate>
                 <table class="table table-condensed table-bordered">
-                    <tr class="success">
+                    <tr class="success bold">
                         <td colspan="6" align="center">
                             Háború
                         </td>
                     </tr>
 
-                    <tr class="info">
+                    <tr class="info bold">
                         <td colspan="6" align="center">
                             Úton lévő seregek
                         </td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info bold">
                         <td colspan="6" align="center">
                             Idegen országban állomásozó seregek
                         </td>
                     </tr>
-                    <tr class="info">
+                    <tr class="danger bold">
                         <td colspan="6" align="center">
                             Idegen seregek az országban
                         </td>
                     </tr>
-                    <tr class="info">
+                    <tr class="warning bold">
                         <td colspan="6" align="center">
                             Összeállított seregek
                         </td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info bold">
                         <td colspan="6" align="center">
                             Támadás előkészítése
                         </td>
                     </tr>
                     <tr>
                         <td width="5%" class="all-center"></td>
-                        <td width="10%" class="all-center">Hajó</td>
-                        <td width="7%" class="all-center">Férőhely</td>
-                        <td width="7%" class="all-center">Mennyi</td>
-                        <td width="7%" class="all-center">Kapacitás</td>
-                        <td width="7%" class="all-center">Sebesség</td>
+                        <td width="10%" class="all-center bold">Hajó</td>
+                        <td width="7%" class="all-center bold">Férőhely</td>
+                        <td width="7%" class="all-center bold">Mennyi</td>
+                        <td width="7%" class="all-center bold">Kapacitás</td>
+                        <td width="7%" class="all-center bold">Sebesség</td>
                     </tr>
                     <tr>
                         <td class="all-center" colspan="2"></td>
-                        <td class="all-center">Összesen:</td>
+                        <td class="all-center bold">Összesen:</td>
                         <td class="all-center"></td>
                         <td class="all-center"></td>
                         <td class="all-center"></td>
@@ -81,13 +81,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="all-center">Akció</td>
+                        <td class="all-center bold">Akció</td>
                         <td class="all-center">
                             <select name="attackSelect" id="attackSelect" ng-model="prepareAttackTypeId" class="form-control">
                                 <option ng-repeat="attackType in attackTypes" value="{{attackType.id}}">{{attackType.name}}</option>
                             </select></td>
-                        <td class="all-center" colspan="2">Célpont</td>
-                        <td class="all-center"></td>
+                        <td class="all-center bold" colspan="2">Célpont</td>
+                        <td class="all-center"><input class="form-control" ng-model="prepareTargetCountryId"/></td>
                         <td class="all-center" colspan="2"><input type="button" class="btn btn-info" value="Előkészít" ng-click="prepareAttack()"></td>
                     </tr>
                 </table>
