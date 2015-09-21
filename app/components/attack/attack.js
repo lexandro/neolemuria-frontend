@@ -34,6 +34,11 @@ angular.module('attack', ['ngRoute'])
                     $scope.homeArmies = homeArmies;
                 });
             }
+
+            $scope.prepareAttack = function () {
+                console.log('Click');
+            };
+
             function getArmyByUnitType(armies, unitTypeId) {
                 var result = null;
                 armies.some(function (army) {

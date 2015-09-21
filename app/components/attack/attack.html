@@ -82,10 +82,13 @@
                     </tr>
                     <tr>
                         <td class="all-center">Akció</td>
-                        <td class="all-center"></td>
+                        <td class="all-center">
+                            <select name="attackSelect" id="attackSelect" ng-model="prepareAttackTypeId" class="form-control">
+                                <option ng-repeat="attackType in attackTypes" value="{{attackType.id}}">{{attackType.name}}</option>
+                            </select></td>
                         <td class="all-center" colspan="2">Célpont</td>
                         <td class="all-center"></td>
-                        <td class="all-center" colspan="2">ElőkészítBTN</td>
+                        <td class="all-center" colspan="2"><input type="button" class="btn btn-info" value="Előkészít" ng-click="prepareAttack()"></td>
                     </tr>
                 </table>
 
