@@ -9,8 +9,8 @@ angular.module('attack', ['ngRoute'])
         });
     }])
 
-    .controller('AttackCtrl', ['$route', '$rootScope', '$scope', '$location', 'Country',
-        function ($route, $rootScope, $scope, $location, Country) {
+    .controller('AttackCtrl', ['$route', '$rootScope', '$scope', '$location', 'Helpers', 'Attack', 'Country',
+        function ($route, $rootScope, $scope, $location, Helpers, Attack, Country) {
             if ($rootScope.token.length < 1) {
                 $location.path('login');
             } else {
@@ -19,15 +19,13 @@ angular.module('attack', ['ngRoute'])
                 var token = $rootScope.token;
 
                 var armies = Country.armies(token.token).get(function () {
+                    console.log(JSON.stringify(armies));
                     var attackArmies = [];
                     var homeArmies = [];
                     unitTypes.forEach(function (unitType) {
                         var homeArmy = {};
                         var homeArmy = getArmyByUnitType(armies, unitType.id);
                         if (homeArmy != null) {
-                            console.log(JSON.stringify(homeArmy));
-                            // http://stackoverflow.com/questions/6298169/how-to-create-a-map-object-in-a-javascript
-                            //    map-es megoldast a dictionarykra
                             homeArmies.push(homeArmy);
                         }
                     });
@@ -36,7 +34,27 @@ angular.module('attack', ['ngRoute'])
             }
 
             $scope.prepareAttack = function () {
-                console.log('Click');
+                var prepareAttackRequest = {};
+                console.log($rootScope.token.user.countryId);
+                console.log($rootScope.token);
+                prepareAttackRequest.senderCountryId = $rootScope.token.user.countryId;
+                prepareAttackRequest.targetCountryId = $scope.prepareTargetCountryId;
+                prepareAttackRequest.attackTypeId = $scope.prepareAttackTypeId;
+                var homeArmies = $scope.homeArmies;
+                var preparedArmies = [];
+                homeArmies.some(function (homeArmy) {
+                    var preparedArmy = {};
+                    if (!Helpers.isEmpty(homeArmy.prepared)) {
+                        preparedArmy.unitId = homeArmy.unitId;
+                        preparedArmy.amount = homeArmy.prepared;
+                        preparedArmies.push(preparedArmy);
+                    }
+                });
+                prepareAttackRequest.armyRequestList = preparedArmies;
+                console.log(JSON.stringify(prepareAttackRequest));
+                var aaa = Attack.attack($rootScope.token.token).prepare(prepareAttackRequest, function () {
+                    console.log(JSON.stringify(aaa));
+                })
             };
 
             function getArmyByUnitType(armies, unitTypeId) {
@@ -97,4 +115,5 @@ angular.module('attack', ['ngRoute'])
                 return result;
             }
         }
-    ]);
+    ])
+;

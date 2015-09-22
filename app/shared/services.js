@@ -36,6 +36,21 @@ angular.module('services', [])
             }
         }
     })
+    .factory('Attack', function ($resource, $rootScope) {
+        return {
+            attack: function (token) {
+                return $resource($rootScope.host + '/attacks', {}, {
+                    prepare: {
+                        method: "POST",
+                        isArray: false,
+                        headers: {
+                            'userToken': token
+                        }
+                    }
+                });
+            }
+        }
+    })
     .factory('Country', function ($resource, $rootScope) {
         return {
             overview: function (token) {
